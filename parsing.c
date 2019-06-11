@@ -37,7 +37,7 @@ int main(int argc, char** argv) {
       operator : '+' | '-' | '*' | '/' | '%' | \"add\" | \"sub\" | \"mul\" | \"div\" | \"mod\" ;  \
       expr     : <number> | '(' <operator> <expr>+ ')' ;  \
       lispy    : /^/ <operator> <expr>+ /$/ ;             \
-    ",
+    "
     Number, Operator, Expr, Lispy);
   
   puts("Lispy Version 0.0.0.0.2");
