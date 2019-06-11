@@ -30,10 +30,11 @@ int main(int argc, char** argv) {
   mpc_parser_t* Lispy    = mpc_new("lispy");
   
   /* Define them with the following Language */
+  /*| /((ab)+a?)/ | /((ba)+b?)/ for consecutive a and b*/
   mpca_lang(MPCA_LANG_DEFAULT,
     "                                                     \
       number   : /-?[0-9]+/ ;                             \
-      operator : '+' | '-' | '*' | '/' ;                  \
+      operator : '+' | '-' | '*' | '/' | '%' | \"add\" | \"sub\" | \"mul\" | \"div\" | \"mod\" ;  \
       expr     : <number> | '(' <operator> <expr>+ ')' ;  \
       lispy    : /^/ <operator> <expr>+ /$/ ;             \
     ",
