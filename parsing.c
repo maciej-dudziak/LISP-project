@@ -31,14 +31,25 @@ int main(int argc, char** argv) {
   
   /* Define them with the following Language */
   /*| /((ab)+a?)/ | /((ba)+b?)/ for consecutive a and b*/
+  /* /-?[0-9]+((.)([0-9]+))?/ - enabling decimal numbers */
   mpca_lang(MPCA_LANG_DEFAULT,
     "                                                     \
-      number   : /-?[0-9]+/ ;                             \
+      number   : /-?[0-9]+((.)([0-9]+))?/ ;                             \
       operator : '+' | '-' | '*' | '/' | '%' | \"add\" | \"sub\" | \"mul\" | \"div\" | \"mod\" ;  \
       expr     : <number> | '(' <operator> <expr>+ ')' ;  \
       lispy    : /^/ <operator> <expr>+ /$/ ;             \
-    "
+    ",
     Number, Operator, Expr, Lispy);
+/*Code for the operators written conventionally between two expressions */ 
+
+/*mpca_lang(MPCA_LANG_DEFAULT,
+    "                                                     \
+      number   : /-?[0-9]+(([.])([0-9]+))?/ ;                             \
+      operator : '+' | '-' | '*' | '/' | '%' | \"add\" | \"sub\" | \"mul\" | \"div\" | \"mod\" ;  \
+      expr     : <number> | '(' <expr> <operator> <expr> ')' ;  \
+      lispy    : /^/ ( <expr> <operator> <expr> )+ ( <operator> <expr> )* /$/ ;             \
+    ",
+    Number, Operator, Expr, Lispy); */
   
   puts("Lispy Version 0.0.0.0.2");
   puts("Press Ctrl+c to Exit\n");
